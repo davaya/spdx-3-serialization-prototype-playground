@@ -1,0 +1,7 @@
+{
+  "type": "Annotation",
+  "spdxId": "spdx-example:SPDXRef-Annotation-3",
+  "annotationType": "other",
+  "subject": "spdx-example:SPDXRef-Package",
+  "statement": "Package level annotation"
+}

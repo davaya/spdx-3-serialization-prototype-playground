@@ -1,0 +1,7 @@
+{
+  "type": "Annotation",
+  "spdxId": "spdx-example:SPDXRef-Annotation-1",
+  "annotationType": "review",
+  "subject": "spdx-example:SPDXRef-DOCUMENT",
+  "statement": "This is just an example.  Some of the non-standard licenses look like they are actually BSD 3 clause licenses"
+}

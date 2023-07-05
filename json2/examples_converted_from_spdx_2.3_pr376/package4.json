@@ -1,0 +1,17 @@
+{
+  "type": "Package",
+  "spdxId": "spdx-example:SPDXRef-Saxon",
+  "name": "Saxon",
+  "description": "The Saxon package is a collection of tools for processing XML documents.",
+  "verifiedUsing": [
+    {
+      "type": "Hash",
+      "algorithm": "sha1",
+      "hashValue": "85ed0817af83a24ad8da68c2b5094de69833983c"
+    }
+  ],
+  "copyrightText": "Copyright Saxonica Ltd",
+  "packageVersion": "8.8",
+  "downloadLocation": "https://sourceforge.net/projects/saxon/files/Saxon-B/8.8.0.7/saxonb8-8-0-7j.zip/download",
+  "homepage": "http://saxon.sourceforge.net/"
+}

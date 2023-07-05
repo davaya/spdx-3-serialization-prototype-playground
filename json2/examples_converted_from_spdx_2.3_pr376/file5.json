@@ -1,0 +1,19 @@
+{
+  "type": "File",
+  "spdxId": "spdx-example:SPDXRef-File",
+  "name": "./package/foo.c",
+  "comment": "The concluded license was taken from the package level that the file was included in.\nThis information was found in the COPYING.txt file in the xyz directory.",
+  "verifiedUsing": [
+    {
+      "type": "Hash",
+      "algorithm": "sha1",
+      "hashValue": "d6a770ba38583ed4bb4525bd96e50461655d2758"
+    },
+    {
+      "type": "Hash",
+      "algorithm": "md5",
+      "hashValue": "624c1abb3664f4b35547e7c73864ad24"
+    }
+  ],
+  "copyrightText": "Copyright 2008-2010 John Smith"
+}

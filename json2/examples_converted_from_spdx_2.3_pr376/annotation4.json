@@ -1,0 +1,7 @@
+{
+  "type": "Annotation",
+  "spdxId": "spdx-example:SPDXRef-Annotation-4",
+  "annotationType": "other",
+  "subject": "spdx-example:SPDXRef-File",
+  "statement": "File level annotation"
+}

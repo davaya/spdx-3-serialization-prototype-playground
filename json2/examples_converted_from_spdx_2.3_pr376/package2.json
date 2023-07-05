@@ -1,0 +1,6 @@
+{
+  "type": "Package",
+  "spdxId": "spdx-example:SPDXRef-fromDoap-1",
+  "name": "Apache Commons Lang",
+  "homepage": "http://commons.apache.org/proper/commons-lang/"
+}

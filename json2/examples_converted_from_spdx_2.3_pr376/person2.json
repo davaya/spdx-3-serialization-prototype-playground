@@ -1,0 +1,12 @@
+{
+  "type": "Person",
+  "spdxId": "spdx-example:SPDXRef-Actor-JaneDoe-jane.doe@example.com",
+  "name": "Jane Doe",
+  "externalIdentifier": [
+    {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "jane.doe@example.com"
+    }
+  ]
+}

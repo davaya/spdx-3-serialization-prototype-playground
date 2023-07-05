@@ -1,0 +1,15 @@
+{
+  "type": "Snippet",
+  "spdxId": "spdx-example:SPDXRef-Snippet",
+  "name": "from linux kernel",
+  "comment": "This snippet was identified as significant and highlighted in this Apache-2.0 file, when a commercial scanner identified it as being derived from file foo.c in package xyz which is licensed under GPL-2.0.",
+  "copyrightText": "Copyright 2008-2010 John Smith",
+  "byteRange": {
+    "begin": 310,
+    "end": 420
+  },
+  "lineRange": {
+    "begin": 5,
+    "end": 23
+  }
+}

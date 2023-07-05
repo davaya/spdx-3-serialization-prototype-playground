@@ -1,0 +1,10 @@
+{
+  "type": "Relationship",
+  "spdxId": "spdx-example:SPDXRef-Relationship-8",
+  "from": "spdx-example:SPDXRef-DOCUMENT",
+  "to": [
+    "spdx-example:SPDXRef-File",
+    "spdx-example:SPDXRef-Package"
+  ],
+  "relationshipType": "describes"
+}

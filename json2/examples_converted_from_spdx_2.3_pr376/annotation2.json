@@ -1,0 +1,7 @@
+{
+  "type": "Annotation",
+  "spdxId": "spdx-example:SPDXRef-Annotation-2",
+  "annotationType": "review",
+  "subject": "spdx-example:SPDXRef-DOCUMENT",
+  "statement": "Another example reviewer."
+}

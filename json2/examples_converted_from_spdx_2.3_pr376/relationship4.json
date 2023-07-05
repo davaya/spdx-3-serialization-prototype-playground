@@ -1,0 +1,9 @@
+{
+  "type": "Relationship",
+  "spdxId": "spdx-example:SPDXRef-Relationship-4",
+  "from": "spdx-example:SPDXRef-JenaLib",
+  "to": [
+    "spdx-example:SPDXRef-Package"
+  ],
+  "relationshipType": "contains"
+}

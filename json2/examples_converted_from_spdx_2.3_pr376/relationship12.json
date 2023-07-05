@@ -1,0 +1,12 @@
+{
+  "type": "Relationship",
+  "spdxId": "spdx-example:SPDXRef-Relationship-12",
+  "from": "spdx-example:SPDXRef-Package",
+  "to": [
+    "spdx-example:SPDXRef-Specification",
+    "spdx-example:SPDXRef-CommonsLangSrc",
+    "spdx-example:SPDXRef-JenaLib",
+    "spdx-example:SPDXRef-DoapSource"
+  ],
+  "relationshipType": "contains"
+}

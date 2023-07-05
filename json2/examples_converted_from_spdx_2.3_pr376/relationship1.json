@@ -1,0 +1,9 @@
+{
+  "type": "Relationship",
+  "spdxId": "spdx-example:SPDXRef-Relationship-1",
+  "from": "spdx-example:SPDXRef-DOCUMENT",
+  "to": [
+    "spdx-example:DocumentRef-spdx-tool-1.2:SPDXRef-ToolsElement"
+  ],
+  "relationshipType": "copy"
+}

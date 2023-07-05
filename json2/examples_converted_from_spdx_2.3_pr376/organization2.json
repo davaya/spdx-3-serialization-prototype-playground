@@ -1,0 +1,12 @@
+{
+  "type": "Organization",
+  "spdxId": "spdx-example:SPDXRef-Actor-ExampleCodeInspect-contact@example.com",
+  "name": "ExampleCodeInspect",
+  "externalIdentifier": [
+    {
+      "type": "ExternalIdentifier",
+      "externalIdentifierType": "email",
+      "identifier": "contact@example.com"
+    }
+  ]
+}

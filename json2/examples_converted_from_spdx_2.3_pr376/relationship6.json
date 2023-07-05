@@ -1,0 +1,9 @@
+{
+  "type": "Relationship",
+  "spdxId": "spdx-example:SPDXRef-Relationship-6",
+  "from": "spdx-example:SPDXRef-fromDoap-0",
+  "to": [
+    "spdx-example:SPDXRef-File"
+  ],
+  "relationshipType": "generates"
+}

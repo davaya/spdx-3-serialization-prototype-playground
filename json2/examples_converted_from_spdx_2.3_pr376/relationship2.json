@@ -1,0 +1,10 @@
+{
+  "type": "SoftwareDependencyRelationship",
+  "spdxId": "spdx-example:SPDXRef-Relationship-2",
+  "from": "spdx-example:SPDXRef-Package",
+  "to": [
+    "spdx-example:SPDXRef-Saxon"
+  ],
+  "relationshipType": "dependsOn",
+  "softwareLinkage": "dynamic"
+}
