@@ -1,6 +1,6 @@
 # SPDX v2.3 Example to Logical Examples
 
-```commandline
+```
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
@@ -23,9 +23,13 @@
 |                                                  | [Agent1](ex/agent.md)                                          |                                                                                      |
 | Person: Jane Doe ()                              | [Person1](ex/person1.md) with minimal CreationInfo             |                                                                                      |
 |                                                  | [Person2](ex/person2.md) with full CreationInfo                |                                                                                      |
-|                                                  | [Person3](ex/person3.md) with no CreationInfo???               |                                                                                      |
+| Person: Joe Reviewer                             | Person3                                                        |                                                                                      |
+| Person: Suzanne Reviewer                         | Person4                                                        |                                                                                      |
+| Person: Package Commenter                        | Person5                                                        |                                                                                      |
+| Person: File Commenter                           | Person6                                                        |                                                                                      |
 | Organization: ExampleCodeInspect ()              | [Organization1](ex/organization1.md)                           |                                                                                      |
 | Tool: LicenseFind-1.0                            | [Tool1](ex/tool1.md) not an Agent                              |                                                                                      |
+|                                                  | [Person7](ex/person3.md) with no CreationInfo???               |                                                                                      |
 | --- **Annotations** ---                          | --- **Annotations** ---                                        |                                                                                      |
 | 2010-01-29T18:30:22Z, Jane Doe ()                | [Annotation1](ex/annotation1.md)                               |                                                                                      |
 | 2010-02-10T00:00:00Z, Joe Reviewer               | Annotation2                                                    |                                                                                      |
@@ -47,13 +51,13 @@
 | --- **Relationships** ---                        | --- **Relationships** ---                                      |                                                                                      |
 |                                                  | [Relationship1](ex/relationship1.md) Pkg1, File1, File2        |                                                                                      |
 |                                                  | [Relationship2](ex/relationship2.md) with time properties      |                                                                                      |
-| DOCUMENT CONTAINS Package                        |                                                                |                                                                                      |
-| DOCUMENT COPY_OF spdx-tool-1.2:ToolsElement      |                                                                |                                                                                      |
-| Package DYNAMIC_LINK Saxon                       |                                                                |                                                                                      |
-| CommonsLangSrc GENERATED_FROM NOASSERTION        |                                                                |                                                                                      |
-| JenaLib CONTAINS Package                         |                                                                |                                                                                      |
-| Specification SPECIFICATION_FOR fromDoap-0       |                                                                |                                                                                      |
-| File GENERATED_FROM fromDoap-0                   |                                                                |                                                                                      |
+| DOCUMENT CONTAINS Package                        | Relationship3                                                  |                                                                                      |
+| DOCUMENT COPY_OF spdx-tool-1.2:ToolsElement      | Relationship4                                                  |                                                                                      |
+| Package DYNAMIC_LINK Saxon                       | Relationship5                                                  |                                                                                      |
+| CommonsLangSrc GENERATED_FROM NOASSERTION        | Relationship6                                                  |                                                                                      |
+| JenaLib CONTAINS Package                         | Relationship7                                                  |                                                                                      |
+| Specification SPECIFICATION_FOR fromDoap-0       | Relationship8                                                  |                                                                                      |
+| File GENERATED_FROM fromDoap-0                   | Relationship9                                                  |                                                                                      |
 |                                                  | [LifecycleScopeRelationship1](ex/lcsrelationship1.md)          |                                                                                      |
 |                                                  | [AssessmentRelationship1](ex/assessmentrelationship1.md)       |                                                                                      |
 |                                                  | [SoftwareDependencyRelationship1](ex/swdeprelationshpi.md)     |                                                                                      |
@@ -72,15 +76,15 @@
 | externalDocumentId: DocumentRef-spdx-tool-1.2    |                                                                |                   SpdxDocument is a document, internal or external                   |
 | --- **Licensing** ---                            | --- **Licensing** ---                                          |                                                                                      |
 |                                                  | [License1](ex/license1.md) single artifact                     |                                                                                      |
+| licenseId: LicenseRef-1                          | License2                                                       |                                                                                      |
+| licenseId: LicenseRef-2                          | license3                                                       |                                                                                      |
+| licenseId: LicenseRef-4                          | License4                                                       |                                                                                      |
+| name: Beer-Ware License (Version 42)             | License5                                                       |                                                                                      |
+| name: CyberNeko License                          | License6                                                       |                                                                                      |
 |                                                  | [CustomLicense1](ex/customlicense1.md) single artifact         |                                                                                      |
 |                                                  | [LicenseExpression1](ex/licenseexpression1.md) single artifact |                                                                                      |
 |                                                  | [LicenseExpression2](ex/licenseexpression2.md) single artifact |                                                                                      |
 |                                                  | [LicenseExpression3](ex/licenseexpression3.md) two artifacts   |                                                                                      |
-| licenseId: LicenseRef-1                          |                                                                |                                                                                      |
-| licenseId: LicenseRef-2                          |                                                                |                                                                                      |
-| licenseId: LicenseRef-4                          |                                                                |                                                                                      |
-| name: Beer-Ware License (Version 42)             |                                                                |                                                                                      |
-| name: CyberNeko License                          |                                                                |                                                                                      |
 |                                                  | --- **Security** ---                                           |                                                                                      |
 |                                                  |                                                                |                                                                                      |
 |                                                  | --- **Build** ---                                              |                                                                                      |
