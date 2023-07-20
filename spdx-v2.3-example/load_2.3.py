@@ -14,8 +14,7 @@ def ver_to_semver(v2ver: str) -> str:
 
 def get_creator(cstring: str) -> dict:
     if m := re.match(r'^\s*(\w+):\s*(.*?)\s*$', cstring):
-        # return {'type': m.group(1), 'value': m.group(2)}
-        return element
+        return {'type': m.group(1), 'value': m.group(2)}
     raise (ValueError, f'invalid creator: "{cstring}"')
 
 
