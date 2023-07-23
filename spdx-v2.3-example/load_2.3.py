@@ -1,30 +1,30 @@
+import os.path
+
 import fire
 import json
 import re
 
 INPUT = 'Spdxv2.3-example.json'
 
-
 def ver_to_semver(v2ver: str) -> str:
     if m := re.match(r'^SPDX-(\d+)\.(\d+)(?:\.(\d+))?$', v2ver):
         mp = m.group(3) if m.group(3) else '0'
         return f'{m.group(1)}.{m.group(2)}.{mp}'
-    raise(ValueError, f'invalid SPDXv2 version {v2ver}')
+    raise ValueError(f'invalid SPDXv2 version {v2ver}')
 
 
-def get_creator(cstring: str) -> dict:
-    if m := re.match(r'^\s*(\w+):\s*(.*?)\s*$', cstring):
-        return {'type': m.group(1), 'value': m.group(2)}
-    raise (ValueError, f'invalid creator: "{cstring}"')
+def get_creator(cstring: str) -> list:
+    if m := re.match(r'^\s*(\w+):\s*([-\.\w\s]+?)\s*(\([^)]*\))?\s*$', cstring):
+        return [m.group(1), m.group(2).replace(' ', ''), m.group(3)]
+    raise ValueError(f'invalid creator: "{cstring}"')
 
 
-def load_spdxv2(filename: str=INPUT):
+def load_spdxv2(filename: str = INPUT):
     elements = []
     with open(filename) as fp:
         src = json.load(fp)
     ns = src['documentNamespace'] + '#'
     ci = src['creationInfo']
-    creators = [get_creator(v) for v in ci['creators']]
     creation_info = {
         'specVersion': ver_to_semver(src['spdxVersion']),
         'comment': ci['comment'],
@@ -34,7 +34,39 @@ def load_spdxv2(filename: str=INPUT):
         'profile': ['Core'],
         'dataLicense': src['dataLicense']
     }
-    print(creation_info)
+    cmap = {'Person': 'createdBy', 'Organization': 'createdBy', 'Tool': 'createdUsing'}
+    for c in ci['creators']:
+        cr = get_creator(c)
+        creation_info[cmap[cr[0]]].append(ns + cr[1])
+    for c in ci['creators']:
+        cr = get_creator(c)
+        elements.append({
+            'spdxId': ns + cr[1],
+            'type': cr[0],
+            'creationInfo': creation_info
+        })
+
+    for c in src['externalDocumentRefs']:
+        elements.append({
+            'spdxId': ns + c['externalDocumentId'],
+            'type': 'SpdxDocument',
+            ''
+        })
+
+    elements.insert(0, {
+        'spdxId': ns + src['SPDXID'],
+        'type': 'Sbom',
+        'name': src['name'],
+        'element': [e['spdxId'] for e in elements],
+        'creationInfo': creation_info
+    })
+
+    for k, v in creation_info.items():
+        print(f'  {k}: {v}')
+
+    of, oe = os.path.splitext(filename)
+    with open(of + '_v3' + oe, 'w') as fp:
+        json.dump(elements, fp, indent=2)
 
 
 if __name__ == '__main__':
