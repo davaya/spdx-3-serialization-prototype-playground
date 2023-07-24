@@ -14,7 +14,7 @@ def ver_to_semver(v2ver: str) -> str:
     raise ValueError(f'invalid SPDXv2 version {v2ver}')
 
 
-def get_creator(cstring: str) -> list:
+def get_agent(cstring: str) -> list:
     if m := re.match(r'^\s*(\w+):\s*([-.\w\s]+?)\s*(\([^)]*\))?\s*$', cstring):
         return [m.group(1), m.group(2).replace(' ', ''), m.group(3)]
     raise ValueError(f'invalid creator: "{cstring}"')
@@ -37,16 +37,26 @@ def load_spdxv2(filename: str = INPUT):
     }
     cmap = {'Person': 'createdBy', 'Organization': 'createdBy', 'Tool': 'createdUsing'}
     for c in ci['creators']:
-        cr = get_creator(c)
+        cr = get_agent(c)
         creation_info[cmap[cr[0]]].append(ns + cr[1])
     for c in ci['creators']:
-        cr = get_creator(c)
+        cr = get_agent(c)
         elements.append({
             'spdxId': ns + cr[1],
             'type': cr[0],
             'creationInfo': creation_info
         })
-
+    """
+    Need to Process:
+      externalDocumentRefs
+      hasExtractedLicensingInfo
+      annotations
+      documentDescribes
+      packages
+      files
+      snippets
+      relationships
+    """
     for c in src['externalDocumentRefs']:
         elements.append({
             'spdxId': ns + c['externalDocumentId'],
@@ -56,15 +66,21 @@ def load_spdxv2(filename: str = INPUT):
             'verifiedUsing': {'hash': {
                 'algorithm': c['checksum']['algorithm'],
                 'hashValue': c['checksum']['checksumValue']
-            }}
+            }},
+            'creationInfo': creation_info
         })
 
-    for c in src['annotations']:
+    for n, c in enumerate(src['annotations'], start=1):
+        ci = dict(creation_info)    # make a copy
+        ci.update({'created': c['annotationDate']})
+        cr = get_agent(c['annotator'])
         elements.append({
-            'spdxId': ns + get_creator(c['annotator'])[1],
+            'spdxId': f'{ns}annotation-{n}',
             'type': 'Annotation',
-            'subject': '',
-            'annotationType': ''
+            'subject': ns + src['SPDXID'],  # Annotations are not attached to individual components
+            'annotationType': 'review' if c['annotationType'].lower() == 'review' else 'other',
+            'statement': c['comment'],
+            'creationInfo': creation_info
         })
 
     elements.insert(0, {
