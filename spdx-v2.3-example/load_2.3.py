@@ -6,6 +6,7 @@ import re
 
 INPUT = 'Spdxv2.3-example.json'
 
+
 def ver_to_semver(v2ver: str) -> str:
     if m := re.match(r'^SPDX-(\d+)\.(\d+)(?:\.(\d+))?$', v2ver):
         mp = m.group(3) if m.group(3) else '0'
@@ -14,7 +15,7 @@ def ver_to_semver(v2ver: str) -> str:
 
 
 def get_creator(cstring: str) -> list:
-    if m := re.match(r'^\s*(\w+):\s*([-\.\w\s]+?)\s*(\([^)]*\))?\s*$', cstring):
+    if m := re.match(r'^\s*(\w+):\s*([-.\w\s]+?)\s*(\([^)]*\))?\s*$', cstring):
         return [m.group(1), m.group(2).replace(' ', ''), m.group(3)]
     raise ValueError(f'invalid creator: "{cstring}"')
 
@@ -50,7 +51,20 @@ def load_spdxv2(filename: str = INPUT):
         elements.append({
             'spdxId': ns + c['externalDocumentId'],
             'type': 'SpdxDocument',
-            ''
+            'element': [c['spdxDocument'] + '#SPDXRef-DOCUMENT'],
+            'name': c['externalDocumentId'],
+            'verifiedUsing': {'hash': {
+                'algorithm': c['checksum']['algorithm'],
+                'hashValue': c['checksum']['checksumValue']
+            }}
+        })
+
+    for c in src['annotations']:
+        elements.append({
+            'spdxId': ns + get_creator(c['annotator'])[1],
+            'type': 'Annotation',
+            'subject': '',
+            'annotationType': ''
         })
 
     elements.insert(0, {
