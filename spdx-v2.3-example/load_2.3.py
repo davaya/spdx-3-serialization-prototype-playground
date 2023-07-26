@@ -14,10 +14,19 @@ def ver_to_semver(v2ver: str) -> str:
     raise ValueError(f'invalid SPDXv2 version {v2ver}')
 
 
-def get_agent(cstring: str) -> list:
-    if m := re.match(r'^\s*(\w+):\s*([-.\w\s]+?)\s*(\([^)]*\))?\s*$', cstring):
+def get_agent(astring: str) -> list:
+    if m := re.match(r'^\s*(\w+):\s*([-.\w\s]+?)\s*(\([^)]*\))?\s*$', astring):
         return [m.group(1), m.group(2).replace(' ', ''), m.group(3)]
-    raise ValueError(f'invalid creator: "{cstring}"')
+    raise ValueError(f'invalid creator: "{astring}"')
+
+
+def make_agent_element(astring: str, ns, cinfo) -> dict:
+    atype, aid, extra = get_agent(astring)
+    return {
+        'spdxId': ns + aid,
+        'type': atype,
+        'creationInfo': cinfo
+    }
 
 
 def load_spdxv2(filename: str = INPUT):
@@ -40,12 +49,8 @@ def load_spdxv2(filename: str = INPUT):
         cr = get_agent(c)
         creation_info[cmap[cr[0]]].append(ns + cr[1])
     for c in ci['creators']:
-        cr = get_agent(c)
-        elements.append({
-            'spdxId': ns + cr[1],
-            'type': cr[0],
-            'creationInfo': creation_info
-        })
+        elements.append(make_agent_element(c, ns, creation_info))
+
     """
     Need to Process:
       externalDocumentRefs
@@ -73,14 +78,16 @@ def load_spdxv2(filename: str = INPUT):
     for n, c in enumerate(src['annotations'], start=1):
         ci = dict(creation_info)    # make a copy
         ci.update({'created': c['annotationDate']})
-        cr = get_agent(c['annotator'])
+        agent_element = make_agent_element(c['annotator'], ns, creation_info)
+        ci.update({'createdBy': agent_element['spdxId']})
+        elements.append(agent_element)
         elements.append({
             'spdxId': f'{ns}annotation-{n}',
             'type': 'Annotation',
             'subject': ns + src['SPDXID'],  # Annotations are not attached to individual components
             'annotationType': 'review' if c['annotationType'].lower() == 'review' else 'other',
             'statement': c['comment'],
-            'creationInfo': creation_info
+            'creationInfo': ci
         })
 
     elements.insert(0, {
